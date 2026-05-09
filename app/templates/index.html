@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AW Client Report Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}" />
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-950">
+    <main class="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 py-10">
+      <header class="text-center">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-700">EF Financial Planning</p>
+        <h1 class="mt-3 text-4xl font-black tracking-tight">AW Client Report Portal</h1>
+        <p class="mt-3 text-slate-600">Generate polished SACS cashflow and TCC net worth reports in minutes.</p>
+      </header>
+
+      <section class="rounded-3xl bg-white p-6 shadow-xl shadow-slate-200/80 ring-1 ring-slate-200 md:p-8">
+        <form class="grid gap-8" method="post" action="/reports/generate">
+          <div class="grid gap-4 md:grid-cols-2">
+            <label class="field-label">Client Name
+              <input name="client_name" value="{{ data.client_name }}" required />
+            </label>
+            <label class="field-label">Quarter
+              <input name="quarter" value="{{ data.quarter }}" required />
+            </label>
+          </div>
+
+          <div class="grid gap-6 lg:grid-cols-2">
+            <fieldset class="form-card border-blue-100">
+              <legend class="section-title text-blue-700">Retirement Accounts</legend>
+              <label class="field-label">Husband
+                <input type="number" step="0.01" name="retirement_husband" value="{{ data.retirement_husband }}" required />
+              </label>
+              <label class="field-label">Wife
+                <input type="number" step="0.01" name="retirement_wife" value="{{ data.retirement_wife }}" required />
+              </label>
+            </fieldset>
+
+            <fieldset class="form-card border-emerald-100">
+              <legend class="section-title text-emerald-700">Other Assets &amp; Liabilities</legend>
+              <label class="field-label">Non-Retirement
+                <input type="number" step="0.01" name="non_retirement" value="{{ data.non_retirement }}" required />
+              </label>
+              <label class="field-label">Trust
+                <input type="number" step="0.01" name="trust" value="{{ data.trust }}" required />
+              </label>
+              <label class="field-label">House Value (Zillow)
+                <input type="number" step="0.01" name="house_value" value="{{ data.house_value }}" required />
+              </label>
+              <label class="field-label">Liabilities
+                <input type="number" step="0.01" name="liabilities" value="{{ data.liabilities }}" required />
+              </label>
+            </fieldset>
+          </div>
+
+          <div class="grid gap-6 lg:grid-cols-2">
+            <fieldset class="form-card border-cyan-100">
+              <legend class="section-title text-cyan-700">Quarterly Inflow</legend>
+              <label class="field-label">Salary / Earned Income
+                <input type="number" step="0.01" name="salary_income" value="{{ data.salary_income }}" required />
+              </label>
+              <label class="field-label">Social Security
+                <input type="number" step="0.01" name="social_security" value="{{ data.social_security }}" required />
+              </label>
+              <label class="field-label">Pension Income
+                <input type="number" step="0.01" name="pension_income" value="{{ data.pension_income }}" required />
+              </label>
+              <label class="field-label">Other Inflow
+                <input type="number" step="0.01" name="other_inflow" value="{{ data.other_inflow }}" required />
+              </label>
+            </fieldset>
+
+            <fieldset class="form-card border-rose-100">
+              <legend class="section-title text-rose-700">Quarterly Outflow</legend>
+              <label class="field-label">Mortgage / Housing
+                <input type="number" step="0.01" name="mortgage" value="{{ data.mortgage }}" required />
+              </label>
+              <label class="field-label">Taxes
+                <input type="number" step="0.01" name="taxes" value="{{ data.taxes }}" required />
+              </label>
+              <label class="field-label">Living Expenses
+                <input type="number" step="0.01" name="living_expenses" value="{{ data.living_expenses }}" required />
+              </label>
+              <label class="field-label">Insurance
+                <input type="number" step="0.01" name="insurance" value="{{ data.insurance }}" required />
+              </label>
+              <label class="field-label">Other Outflow
+                <input type="number" step="0.01" name="other_outflow" value="{{ data.other_outflow }}" required />
+              </label>
+            </fieldset>
+          </div>
+
+          <button class="rounded-2xl bg-gradient-to-r from-blue-600 to-emerald-600 px-6 py-4 text-lg font-bold text-white shadow-lg transition hover:scale-[1.01] hover:shadow-xl" type="submit">
+            Generate SACS + TCC Reports
+          </button>
+        </form>
+      </section>
+
+      {% if generated %}
+        <section class="rounded-3xl bg-white p-8 text-center shadow-xl shadow-slate-200/80 ring-1 ring-emerald-200">
+          <p class="text-2xl font-black text-emerald-700">✅ Reports Generated Successfully!</p>
+          <div class="mt-5 grid gap-3 text-lg md:grid-cols-2">
+            <p>Excess to Private Reserve: <strong>{{ private_reserve }}</strong></p>
+            <p>Grand Total Net Worth: <strong>{{ net_worth }}</strong></p>
+          </div>
+          <div class="mt-7 flex flex-wrap justify-center gap-4">
+            <a class="download-link bg-blue-600" href="{{ url_for('download_sacs') }}?{{ query_params | urlencode }}">⬇ Download SACS PDF</a>
+            <a class="download-link bg-emerald-600" href="{{ url_for('download_tcc') }}?{{ query_params | urlencode }}">⬇ Download TCC PDF</a>
+          </div>
+        </section>
+      {% endif %}
+    </main>
+  </body>
+</html>
