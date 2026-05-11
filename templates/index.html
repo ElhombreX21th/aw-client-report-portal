@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AW Client Report Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto p-8">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-2">AW Client Report Portal</h1>
+        <p class="text-center text-gray-600 mb-8">EF Financial Planning • {{ client.name }}</p>
+
+        <form id="reportForm" class="bg-white shadow-xl rounded-2xl p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Retirement -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4 text-blue-700">Retirement Accounts</h3>
+                    <div class="space-y-4">
+                        <div><label class="block text-sm">Husband</label><input type="number" id="ret_h" value="450000" class="w-full border rounded-lg px-4 py-3"></div>
+                        <div><label class="block text-sm">Wife</label><input type="number" id="ret_w" value="320000" class="w-full border rounded-lg px-4 py-3"></div>
+                    </div>
+                </div>
+
+                <!-- Other Assets -->
+                <div>
+                    <h3 class="font-semibold text-lg mb-4 text-emerald-700">Other Assets & Liabilities</h3>
+                    <div class="space-y-4">
+                        <div><label>Non-Retirement</label><input type="number" id="non_ret" value="180000" class="w-full border rounded-lg px-4 py-3"></div>
+                        <div><label>Trust</label><input type="number" id="trust" value="250000" class="w-full border rounded-lg px-4 py-3"></div>
+                        <div><label>House Value (Zillow)</label><input type="number" id="house" value="850000" class="w-full border rounded-lg px-4 py-3"></div>
+                        <div><label>Liabilities</label><input type="number" id="liab" value="120000" class="w-full border rounded-lg px-4 py-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-2 gap-6">
+                <div><label class="block text-sm">Other Inflow</label><input type="number" id="in_other" value="0" class="w-full border rounded-lg px-4 py-3"></div>
+                <div><label class="block text-sm">Other Outflow</label><input type="number" id="out_other" value="0" class="w-full border rounded-lg px-4 py-3"></div>
+            </div>
+
+            <button type="submit" 
+                    class="mt-10 w-full bg-gradient-to-r from-blue-600 to-emerald-600 text-white font-bold py-5 rounded-2xl text-xl hover:scale-105 transition">
+                Generate SACS + TCC Reports
+            </button>
+        </form>
+
+        <div id="results" class="mt-8"></div>
+    </div>
+
+    <script>
+        document.getElementById('reportForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const form = new FormData();
+            form.append('retirement_husband', document.getElementById('ret_h').value);
+            form.append('retirement_wife', document.getElementById('ret_w').value);
+            form.append('non_retirement', document.getElementById('non_ret').value);
+            form.append('trust', document.getElementById('trust').value);
+            form.append('house_value', document.getElementById('house').value);
+            form.append('liabilities', document.getElementById('liab').value);
+            form.append('inflow_other', document.getElementById('in_other').value);
+            form.append('outflow_other', document.getElementById('out_other').value);
+
+            const res = await fetch('/generate-reports', { method: 'POST', body: form });
+            const data = await res.json();
+
+            document.getElementById('results').innerHTML = `
+                <div class="bg-white shadow-xl rounded-2xl p-8 text-center">
+                    <h2 class="text-3xl font-bold text-emerald-600 mb-6">Reports Generated Successfully</h2>
+                    <p class="text-2xl mb-8">Excess to Private Reserve: <strong>$${data.excess_reserve.toLocaleString()}</strong></p>
+                    <p class="text-2xl mb-10">Net Worth Total: <strong>$${data.grand_total.toLocaleString()}</strong></p>
+                    
+                    <a href="${data.sacs_url}" download class="inline-block bg-blue-600 text-white px-8 py-4 rounded-xl mr-4 hover:bg-blue-700">↓ Download SACS PDF</a>
+                    <a href="${data.tcc_url}" download class="inline-block bg-emerald-600 text-white px-8 py-4 rounded-xl hover:bg-emerald-700">↓ Download TCC PDF</a>
+                    
+                    <p class="text-sm text-gray-500 mt-10">Mock Export to Canva → <span class="underline">Click here (simulado)</span></p>
+                </div>
+            `;
+        };
+    </script>
+</body>
+</html>
