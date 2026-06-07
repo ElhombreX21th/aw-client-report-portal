@@ -13,6 +13,16 @@ Current report outputs include:
 - **SACS - Quarterly Cashflow**
 - **TCC - Net Worth**
 
+## Screenshots
+
+### Client Report Form
+
+![AW Client Report Portal form screen](docs/screenshots/aw-client-report-portal-form.svg)
+
+### Generated Reports
+
+![AW Client Report Portal generated reports screen](docs/screenshots/aw-client-report-portal-results.svg)
+
 ## Features
 
 - FastAPI backend
@@ -38,6 +48,10 @@ Current report outputs include:
 
 ```text
 aw-client-report-portal/
+├── docs/
+│   └── screenshots/
+│       ├── aw-client-report-portal-form.svg
+│       └── aw-client-report-portal-results.svg
 ├── main.py
 ├── templates/
 │   └── index.html
