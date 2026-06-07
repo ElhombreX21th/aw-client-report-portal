@@ -1,0 +1,68 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="8" dy="14" stdDeviation="14" flood-color="#0F172A" flood-opacity="0.20"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#F1F5F9"/>
+  <circle cx="1430" cy="160" r="330" fill="#DBEAFE" opacity="0.9"/>
+  <circle cx="150" cy="920" r="330" fill="#D1FAE5" opacity="0.7"/>
+
+  <rect x="42" y="34" width="1516" height="82" rx="26" fill="#0F172A"/>
+  <circle cx="80" cy="70" r="9" fill="#FF5F56"/>
+  <circle cx="108" cy="70" r="9" fill="#FFBD2E"/>
+  <circle cx="136" cy="70" r="9" fill="#27C93F"/>
+  <rect x="190" y="53" width="1085" height="34" rx="17" fill="#1E293B"/>
+  <text x="214" y="76" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" fill="#CBD5E1">localhost:8000  •  AW Client Report Portal</text>
+  <text x="1306" y="76" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#94A3B8">Reports Generated</text>
+
+  <text x="800" y="195" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="58" font-weight="800" fill="#1F2937">AW Client Report Portal</text>
+  <text x="800" y="242" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="26" fill="#64748B">Client report generation preview</text>
+
+  <rect x="235" y="300" width="1130" height="560" rx="38" fill="white" filter="url(#shadow)"/>
+
+  <circle cx="800" cy="420" r="80" fill="#D1FAE5"/>
+  <circle cx="800" cy="420" r="58" fill="#10B981"/>
+  <path d="M765 420 L795 450 L840 390" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="800" y="565" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="42" font-weight="800" fill="#059669">Reports Generated Successfully</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="330" y="620" width="430" height="124" rx="28" fill="#F8FAFC"/>
+    <rect x="840" y="620" width="430" height="124" rx="28" fill="#F8FAFC"/>
+  </g>
+  <text x="382" y="662" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="800" fill="#475569">Excess to Private Reserve</text>
+  <text x="382" y="710" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="40" font-weight="800" fill="#0F172A">$9,300</text>
+  <text x="892" y="662" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="800" fill="#475569">Grand Total Net Worth</text>
+  <text x="892" y="710" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="40" font-weight="800" fill="#0F172A">$1,930,000</text>
+
+  <rect x="430" y="775" width="330" height="70" rx="22" fill="#2563EB"/>
+  <text x="595" y="820" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="white">Download SACS PDF</text>
+  <rect x="840" y="775" width="330" height="70" rx="22" fill="#059669"/>
+  <text x="1005" y="820" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="24" font-weight="800" fill="white">Download TCC PDF</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="1040" y="360" width="210" height="270" rx="16" fill="white"/>
+    <rect x="1130" y="398" width="210" height="270" rx="16" fill="white"/>
+  </g>
+
+  <rect x="1064" y="388" width="162" height="26" fill="#2563EB"/>
+  <text x="1064" y="458" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="32" font-weight="800" fill="#1F2937">SACS</text>
+  <rect x="1064" y="508" width="150" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="1064" y="532" width="116" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="1064" y="556" width="142" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="1064" y="580" width="110" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="1064" y="612" width="120" height="16" rx="8" fill="#2563EB"/>
+
+  <rect x="1154" y="426" width="162" height="26" fill="#059669"/>
+  <text x="1154" y="496" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="32" font-weight="800" fill="#1F2937">TCC</text>
+  <rect x="1154" y="546" width="154" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="1154" y="570" width="122" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="1154" y="594" width="154" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="1154" y="618" width="122" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="1154" y="650" width="104" height="16" rx="8" fill="#059669"/>
+</svg>
